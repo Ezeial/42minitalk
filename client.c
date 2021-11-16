@@ -7,29 +7,32 @@
 #include <stdio.h>
 #include "libft.h"
 
-#define SEND_BYTE(pid, byte) send_byte(pid, byte, 7)
-
-void send_byte(int pid, unsigned char byte, int position)
+void	send_byte(int pid, unsigned char byte, int position)
 {
 	if (position > 0)
 	{
 		send_byte(pid, byte / 2, position - 1);
 	}
 	usleep(800);
-	kill(pid, byte % 2 ? SIGUSR2 : SIGUSR1);
+	if (byte % 2)
+		kill(pid, SIGUSR2);
+	else
+		kill(pid, SIGUSR1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int pid = atoi(av[1]);
-	char *str = av[2];
-	
+	int		pid;
+	char	*str;
+
+	pid = atoi(av[1]);
+	str = av[2];
 	while (*str)
 	{
 		printf("%c\n", *str);
-		SEND_BYTE(pid, *str);
-		str++;	
+		send_byte(pid, *str, 7);
+		str++;
 	}
-	SEND_BYTE(pid, 0);
+	send_byte(pid, 0, 7);
 	return (0);
 }

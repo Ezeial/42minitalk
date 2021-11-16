@@ -9,7 +9,7 @@ void	ft_write(int bit)
 {
 	static unsigned char	byte;
 	static int				counter;
-	
+
 	byte = byte | bit;
 	counter++;
 	if (counter == 8)
@@ -25,7 +25,7 @@ void	ft_write(int bit)
 		byte = byte << 1;
 }
 
-void handle_signal(int signum)
+void	handle_signal(int signum)
 {
 	if (signum == SIGUSR1)
 		ft_write(0);
