@@ -1,19 +1,10 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <signal.h>
-#include <unistd.h>
-#include <errno.h>
-#include <stdio.h>
-#include "libft.h"
+#include "../includes/minitalk.h"
 
 /**
  * Return -1 if an error has occurred otherwise 0
  */
 static int	send_byte(int pid, unsigned char byte, int position)
 {
-	int	ret;
-
 	if (position > 0 && send_byte(pid, byte / 2, position - 1) == -1)
 		return (-1);
 	if (usleep(800) == -1)
@@ -47,7 +38,7 @@ int	main(int ac, char **av)
 		printf("%c\n", *str);
 		if (send_byte(pid, *str, 7) == -1)
 		{
-			printf("An error has occurred when sending the '%c'.", *str);
+			printf("An error has occurred when sending the '%c'.\n", *str);
 			return (1);
 		}
 		str++;
