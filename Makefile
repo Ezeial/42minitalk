@@ -1,39 +1,38 @@
-CC 			= 	gcc
 NAME_SERVER	=	server
 NAME_CLIENT	=	client
-LIB_PATH	=	libft/libft.a
+
+LIB_FOLDER	=	libft
+
 INCLUDES	=	includes/minitalk.h
+
 SRCS_CLIENT	=	srcs/client.c
 SRCS_SERVER	=	srcs/server.c
 
 OBJS_CLIENT =	$(SRCS_CLIENT:.c=.o)
 OBJS_SERVER	=	$(SRCS_SERVER:.c=.o)
 
-#CFLAGS		=	-Wall -Wextra -g3 -fsanitize=address
 CFLAGS		=	-Wall -Wextra -Werror
+CC			=	gcc
 
-all : $(NAME_SERVER) $(NAME_CLIENT)
+all: ${NAME_CLIENT} ${NAME_SERVER}
 
-######################################### SERVER #########################################
 $(NAME_SERVER): $(OBJS_SERVER) $(INCLUDES)
-	make -C libft
-	$(CC) ${CFLAGS} $(OBJS_SERVER) $(LIB_PATH) -o $(NAME_SERVER)
+	make -C ${LIB_FOLDER}
+	$(CC) ${CFLAGS} -L./${LIB_FOLDER} -I./libft/includes $(OBJS_SERVER) -lft -o $(NAME_SERVER)
 
-######################################### CLIENT #########################################
 $(NAME_CLIENT): $(OBJS_CLIENT) $(INCLUDES)
-	make -C libft
-	$(CC) ${CFLAGS} $(OBJS_CLIENT) $(LIB_PATH) -o $(NAME_CLIENT)
-
-##########################################################################################
+	make -C ${LIB_FOLDER}
+	$(CC) ${CFLAGS} -L./${LIB_FOLDER} -I./libft/includes $(OBJS_CLIENT) -lft -o $(NAME_CLIENT)
 
 clean:
-	make $@ -C libft
+	make clean -C ${LIB_FOLDER}
 	rm -f $(OBJS_SERVER) $(OBJS_CLIENT)
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o $@
 
 fclean: clean
+	make fclean -C ${LIB_FOLDER}
 	rm -f $(NAME_SERVER)
 	rm -f $(NAME_CLIENT)
 
