@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:51 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 22:22:51 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:29:21 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 	}
 	if (send_byte(pid, 0, 7) == -1)
 	{
-		ft_putstr_fd("An error has occurred when sending the end signal.", 1);
+		ft_putstr_fd("An error has occurred when sending the end signal.\n", 1);
 		return (1);
 	}
 	return (0);
