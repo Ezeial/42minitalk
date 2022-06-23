@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:45:54 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 21:05:32 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:02:45 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ typedef struct buff_data {
 	char	buffer[BUFFER_SIZE];
 	size_t	index;
 }	t_buff_data;
+
+void	clear_buff_data(t_buff_data *buff_data);
+void	ft_byte_received(t_buff_data *buff_data, pid_t *last_pid,
+			unsigned char *byte, int *counter);
 
 #endif

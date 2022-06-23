@@ -6,7 +6,7 @@ LIB_FOLDER	=	libft
 INCLUDES	=	includes/minitalk.h
 
 SRCS_CLIENT	=	srcs/client.c
-SRCS_SERVER	=	srcs/server.c
+SRCS_SERVER	=	srcs/server.c srcs/server_utils.c
 
 OBJS_CLIENT =	$(SRCS_CLIENT:.c=.o)
 OBJS_SERVER	=	$(SRCS_SERVER:.c=.o)

@@ -6,63 +6,11 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:29 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 21:11:06 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:01:50 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
-
-static void	clean_buffer(t_buff_data *buff_data)
-{
-	size_t	index;
-
-	index = 0;
-	while (index < BUFFER_SIZE)
-		buff_data->buffer[index++] = 0;
-	buff_data->index = 0;
-}
-
-static void	clear_buff_data(t_buff_data *buff_data)
-{
-	clean_buffer(buff_data);
-	if (buff_data->str)
-	{
-		free(buff_data->str);
-		buff_data->str = NULL;
-	}
-}
-
-static int	push_in_buffer(t_buff_data *buff_data, char c)
-{
-	char	*temp;
-
-	if (buff_data->index < BUFFER_SIZE)
-	{
-		buff_data->buffer[buff_data->index] = c;
-		(buff_data->index)++;
-	}
-	else
-	{
-		if (!buff_data->str)
-		{
-			buff_data->str = ft_strdup(buff_data->buffer);
-			if (!buff_data->str)
-				return (-1);
-		}
-		else
-		{
-			temp = buff_data->str;
-			buff_data->str = ft_strjoin(buff_data->str, buff_data->buffer);
-			free(temp);
-			if (!buff_data->str)
-				return (-1);
-		}
-		clean_buffer(buff_data);
-		buff_data->buffer[buff_data->index] = c;
-		(buff_data->index)++;
-	}
-	return (0);
-}
 
 static void	ft_write(int bit, pid_t pid_client)
 {
@@ -82,30 +30,7 @@ static void	ft_write(int bit, pid_t pid_client)
 	byte = byte | bit;
 	counter++;
 	if (counter == 8)
-	{
-		if (byte == 0)
-		{
-			if (buff_data.str)
-			{
-				printf("%s", buff_data.str);
-				free(buff_data.str);
-				buff_data.str = NULL;
-			}
-			printf("%s\n", buff_data.buffer);
-			clean_buffer(&buff_data);
-			last_pid = 0;
-		}
-		else
-		{
-			if (push_in_buffer(&buff_data, byte) < 0)
-			{
-				clear_buff_data(&buff_data);
-				return ;
-			}
-		}
-		byte = 0;
-		counter = 0;
-	}
+		ft_byte_received(&buff_data, &last_pid, &byte, &counter);
 	else
 		byte = byte << 1;
 }
