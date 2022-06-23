@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:29 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 22:01:50 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:20:31 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_write(int bit, pid_t pid_client)
 	{
 		byte = 0;
 		counter = 0;
-		printf(" -> this frame of the last client was incomplete.\n");
+		ft_putstr_fd(" -> this frame of the last client was incomplete.\n", 1);
 		clear_buff_data(&buff_data);
 	}
 	last_pid = pid_client;
