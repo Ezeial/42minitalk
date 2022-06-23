@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:50:29 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 22:20:31 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:26:01 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,17 @@ int	main(void)
 	pid_t		a;
 
 	a = getpid();
-	printf("PID : %d\n\n", a);
+	ft_putstr_fd("PID : ", 1);
+	ft_putnbr_fd(a, 1);
+	ft_putstr_fd("\n\n", 1);
 	if (register_handler(SIGUSR1) == -1)
 	{
-		printf("Error when register SIGUSER1 listener.\n");
+		ft_putstr_fd("Error when register SIGUSER1 listener.\n", 1);
 		exit(1);
 	}
 	else if (register_handler(SIGUSR2) == -1)
 	{
-		printf("Error when register SIGUSER2 listener.\n");
+		ft_putstr_fd("Error when register SIGUSER2 listener.\n", 1);
 		exit(1);
 	}
 	while (42)

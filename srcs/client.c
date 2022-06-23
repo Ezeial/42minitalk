@@ -6,7 +6,7 @@
 /*   By: egiraldi <egiraldi@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:44:51 by egiraldi          #+#    #+#             */
-/*   Updated: 2022/06/23 22:14:47 by egiraldi         ###   ########lyon.fr   */
+/*   Updated: 2022/06/23 22:22:51 by egiraldi         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_parse(int ac, char **av)
 			"The 2nd argument must be a string.\n", 1);
 		return (-1);
 	}
-	pid = atoi(av[1]);
+	pid = ft_atoi(av[1]);
 	if (pid == 0)
 	{
 		ft_putstr_fd("Invalid PID provided\n", 1);
